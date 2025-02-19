@@ -1,0 +1,58 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class Task1 {
+    public static void NumberGuessingGame(){
+        try (Scanner sc = new Scanner(System.in)) {
+            boolean wanna_play_again = false;
+            double totalscore=0;
+            double TC=0;
+            double RoundPlay=0;
+            
+            do{
+                Random rd = new Random();
+                int random_num = rd.nextInt(100);
+
+                int k=10;   // No. of attempts //
+                double guess_num;
+                boolean guess_correctly = false;
+                
+                System.out.println("Welcome To Number Guessing Game by utkarsh");
+                System.out.println("A Random Number is generated between 1 to 100.\nYou have "+k+" attempts to guess it.");
+                
+                for(int i=0; i<k; i++){
+
+                    System.out.println("Enter your Guess: ");
+                    guess_num = sc.nextInt();
+
+                    if(random_num == guess_num){
+                        System.out.println("Congratulation!!\nYour guess is Correct on "+i+"th attempt");
+                        guess_correctly = true;
+                        totalscore = (k - i+1);
+                        break;
+                    }
+                    else if(random_num > guess_num){
+                        System.out.println("Your guess is Too Low");
+                    }
+                    else if(random_num < guess_num){
+                        System.out.println("Your guess is Too High");
+                    }
+                }
+                if(!guess_correctly){
+                    System.out.println("Sorry!!\nYou run out of attempts.\nThe random number was: "+random_num);
+                }
+                RoundPlay = RoundPlay + 1;
+                TC=(TC+totalscore)/RoundPlay;
+                System.out.println("Want to play one more round (yes/no)");
+                String st = sc.next().toLowerCase();
+                wanna_play_again = st.equals("yes");
+            }
+            while(wanna_play_again);
+            System.out.println("Thanks for Playing");
+            System.out.println("Your Score is: "+TC);
+        }
+    }
+    public static void main(String[] args) {
+        NumberGuessingGame();
+    }
+}
