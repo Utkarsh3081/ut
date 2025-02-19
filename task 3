@@ -1,0 +1,71 @@
+import java.util.Scanner;
+public class Task3 {
+    
+    double amount_balance;
+
+    public Task3(double initial_balance){
+        this.amount_balance = initial_balance;
+    }
+    
+
+    // Withdraw
+    public void withdraw(double amount){
+        
+        // amount = sc.nextDouble();
+        if(amount_balance > amount){
+            amount_balance = amount_balance - amount;
+            System.out.println("Amount "+amount+" is debted from your account.");
+            System.out.println("Your current balance is: "+amount_balance);
+        }
+        else{
+            System.out.println("Do not have enought amount.");
+        }
+    }
+
+    // Deposit
+    public void deposit(double amount){
+        
+        // amount = sc.nextDouble();
+        amount_balance = amount_balance + amount;
+        System.out.println("Amount "+amount+" is succesfully credited to your account,");
+        System.out.println("Your current balance is "+amount_balance);
+    }
+
+    // check Balance
+    void checkBalance(){
+        System.out.println("Your current balance is "+amount_balance);
+    }
+
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            Task3 atm= new Task3(1000.0);
+            int choice;
+
+            do {
+                System.out.println("\n1. Withdraw\n2. Deposit\n3. Check Balance\n4. Exit");
+                System.out.print("Enter choice: ");
+                choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter amount to withdraw: ");
+                        atm.withdraw(sc.nextDouble());
+                        break;
+                    case 2:
+                        System.out.print("Enter amount to deposit: ");
+                        atm.deposit(sc.nextDouble());
+                        break;
+                    case 3:
+                        atm.checkBalance();
+                        break;
+                    case 4:
+                        System.out.println("Thank you for using the ATM.");
+                        break;
+                    default:
+                        System.out.println("Invalid input. Try again.");
+                }
+            } 
+            while (choice != 4);
+        }
+    }
+}
